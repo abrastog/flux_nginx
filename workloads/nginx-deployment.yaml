@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 3
+  replicas: 1
   strategy:
     rollingupdate:
       maxSurge: 2
@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: bharamicrosystems/nginx:v2
+        image: bharamicrosystems/nginx:v1
         ports:
         - containerPort: 80
