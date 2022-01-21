@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: web-prod
   namespace: web1
-  labels:
-    app: web-Deploy
 spec:
   replicas: 5
   strategy:
@@ -13,14 +11,11 @@ spec:
       maxSurge: 1
       maxUnavailable: 0
   selector:
-    matchLabels:
-      app: web-Deploy 
+    matchLabels: 
       app: nginx   
   template:
     metadata:
-      name: web-prod
       labels:
-        app: web-Deploy 
         app: nginx 
     spec:              
       containers:
