@@ -1,26 +1,39 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  namespace: web1
+  name: web-prod
+  labels:
+    app: web-Deploy
+    namespace: web1
 spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+      timeoutSeconds: 100
+      intervalSeconds: 5
+      updatePeriodSeconds: 5
   selector:
     matchLabels:
-      app: nginx
-  replicas: 1
-  strategy:
-    rollingupdate:
-      maxSurge: 2
-      maxUnavailable: 0
-    type: RollingUpdate
+      app: web-Deploy 
+      app: nginx   
   template:
     metadata:
+      name: web-prod
       labels:
-        app: nginx
-    spec:
+        app: web-Deploy 
+        app: nginx 
+    spec:              
       containers:
-      - name: nginx
-        image: bharamicrosystems/nginx:v1
-        ports:
-        - containerPort: 80
+        - name: web
+          image: nginx:1.11.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "400Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
