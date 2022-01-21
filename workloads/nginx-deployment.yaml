@@ -20,7 +20,7 @@ spec:
     spec:              
       containers:
         - name: web
-          image: bharamicrosystems/nginx:v1
+          image: bharamicrosystems/nginx:v2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
